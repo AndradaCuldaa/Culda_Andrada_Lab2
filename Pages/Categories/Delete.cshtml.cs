@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Culda_Andrada_Lab2.Data;
 using Culda_Andrada_Lab2.Models;
 
-namespace Culda_Andrada_Lab2.Pages.Books
+namespace Culda_Andrada_Lab2.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace Culda_Andrada_Lab2.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public BookCategory BookCategory { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace Culda_Andrada_Lab2.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+            var bookcategory = await _context.BookCategory.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (book == null)
+            if (bookcategory == null)
             {
                 return NotFound();
             }
             else
             {
-                Book = book;
+                BookCategory = bookcategory;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace Culda_Andrada_Lab2.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FindAsync(id);
-            if (book != null)
+            var bookcategory = await _context.BookCategory.FindAsync(id);
+            if (bookcategory != null)
             {
-                Book = book;
-                _context.Book.Remove(Book);
+                BookCategory = bookcategory;
+                _context.BookCategory.Remove(BookCategory);
                 await _context.SaveChangesAsync();
             }
 

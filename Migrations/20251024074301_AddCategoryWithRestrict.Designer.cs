@@ -4,6 +4,7 @@ using Culda_Andrada_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Culda_Andrada_Lab2.Migrations
 {
     [DbContext(typeof(Culda_Andrada_Lab2Context))]
-    partial class Culda_Andrada_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20251024074301_AddCategoryWithRestrict")]
+    partial class AddCategoryWithRestrict
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,6 +57,9 @@ namespace Culda_Andrada_Lab2.Migrations
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6, 2)");
 
@@ -70,6 +76,8 @@ namespace Culda_Andrada_Lab2.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
+
+                    b.HasIndex("CategoryID");
 
                     b.HasIndex("PublisherID");
 
@@ -139,11 +147,19 @@ namespace Culda_Andrada_Lab2.Migrations
                         .WithMany("Books")
                         .HasForeignKey("AuthorID");
 
+                    b.HasOne("Culda_Andrada_Lab2.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Culda_Andrada_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
                     b.Navigation("Author");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Publisher");
                 });

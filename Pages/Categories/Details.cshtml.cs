@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Culda_Andrada_Lab2.Data;
 using Culda_Andrada_Lab2.Models;
 
-namespace Culda_Andrada_Lab2.Pages.Books
+namespace Culda_Andrada_Lab2.Pages.Categories
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Culda_Andrada_Lab2.Pages.Books
             _context = context;
         }
 
-        public Book Book { get; set; } = default!;
+        public BookCategory BookCategory { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,19 +28,15 @@ namespace Culda_Andrada_Lab2.Pages.Books
                 return NotFound();
             }
 
-        
-            Book = await _context.Book
-        .Include(b => b.Publisher)
-        .Include(b => b.Author)
-        .Include(b => b.BookCategories) 
-            .ThenInclude(bc => bc.Category) 
-        .AsNoTracking() 
-        .FirstOrDefaultAsync(m => m.ID == id);
-            if (Book == null)
+            var bookcategory = await _context.BookCategory.FirstOrDefaultAsync(m => m.ID == id);
+            if (bookcategory == null)
             {
                 return NotFound();
             }
-            
+            else
+            {
+                BookCategory = bookcategory;
+            }
             return Page();
         }
     }

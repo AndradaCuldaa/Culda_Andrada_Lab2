@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Culda_Andrada_Lab2.Models;
 
+
 namespace Culda_Andrada_Lab2.Data
 {
     public class Culda_Andrada_Lab2Context : DbContext
@@ -17,5 +18,12 @@ namespace Culda_Andrada_Lab2.Data
         public DbSet<Culda_Andrada_Lab2.Models.Book> Book { get; set; } = default!;
         public DbSet<Publisher> Publisher { get; set; } = default!;
         public DbSet<Author> Author { get; set; } = default!;
+        public DbSet<Culda_Andrada_Lab2.Models.BookCategory> BookCategory { get; set; } = default!;
+        public DbSet<Category> Category { get; set; } = default!;
+
+   
+        
+
+
     }
 }
