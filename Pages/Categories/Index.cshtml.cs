@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Culda_Andrada_Lab2.Data;
 using Culda_Andrada_Lab2.Models;
+using Culda_Andrada_Lab2.Models.ViewModels;
 
 namespace Culda_Andrada_Lab2.Pages.Categories
 {
@@ -19,13 +20,31 @@ namespace Culda_Andrada_Lab2.Pages.Categories
             _context = context;
         }
 
-        public IList<BookCategory> BookCategory { get;set; } = default!;
+        public CategoryData CategoryD { get; set; } = new CategoryData();
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id)
         {
-            BookCategory = await _context.BookCategory
-                .Include(b => b.Book)
-                .Include(b => b.Category).ToListAsync();
+            CategoryD.Categories = await _context.Category
+                  .Include(c => c.BookCategories)
+                      .ThenInclude(bc => bc.Book)
+                          .ThenInclude(b => b.Author)
+                  .OrderBy(c => c.CategoryName)
+                  .AsNoTracking()
+                  .ToListAsync();
+
+            if (id != null)
+            {
+                CategoryD.CategoryID = id.Value;
+                var category = CategoryD.Categories
+                    .Where(c => c.ID == id.Value)
+                    .SingleOrDefault();
+
+                if (category != null)
+                {
+                    CategoryD.Books = category.BookCategories
+                        .Select(bc => bc.Book);
+                }
+            }
         }
     }
 }
