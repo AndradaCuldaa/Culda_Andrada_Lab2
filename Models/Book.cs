@@ -6,7 +6,7 @@ namespace Culda_Andrada_Lab2.Models
 {
     public class Book
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 
@@ -22,6 +22,7 @@ namespace Culda_Andrada_Lab2.Models
         public int? AuthorID { get; set; }
         public Author? Author { get; set; }
 
+        public ICollection<BookCategory>? BookCategories { get; set; }
     }
     //navigation property
 

@@ -17,5 +17,8 @@ namespace Culda_Andrada_Lab2.Data
         public DbSet<Culda_Andrada_Lab2.Models.Book> Book { get; set; } = default!;
         public DbSet<Publisher> Publisher { get; set; } = default!;
         public DbSet<Author> Author { get; set; } = default!;
+
+        public DbSet<Category> Category { get; set; }
+        public DbSet<BookCategory> BookCategory { get; set; }
     }
 }
