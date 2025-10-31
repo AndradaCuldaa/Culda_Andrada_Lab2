@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Culda_Andrada_Lab2.Models;
 
+
 namespace Culda_Andrada_Lab2.Data
 {
     public class Culda_Andrada_Lab2Context : DbContext
