@@ -6,7 +6,7 @@ namespace Culda_Andrada_Lab2.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 

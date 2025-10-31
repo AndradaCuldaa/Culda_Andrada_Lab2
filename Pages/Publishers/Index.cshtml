@@ -20,8 +20,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Publisher) {
-        <tr>
+@foreach (var item in Model.PublisherData.Publishers) {
+        string selectedRow = "";
+         if (item.ID == Model.PublisherID)
+         {
+            selectedRow = "table-success";
+         }
+        <tr class="@selectedRow">
+
+        
             <td>
                 @Html.DisplayFor(modelItem => item.PublisherName)
             </td>
