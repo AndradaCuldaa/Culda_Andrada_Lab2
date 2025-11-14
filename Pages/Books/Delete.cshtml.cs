@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Culda_Andrada_Lab2.Data;
+using Culda_Andrada_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Culda_Andrada_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly Culda_Andrada_Lab2.Data.Culda_Andrada_Lab2Context _context;
