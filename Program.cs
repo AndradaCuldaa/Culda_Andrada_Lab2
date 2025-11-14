@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Books");
+});
 builder.Services.AddDbContext<Culda_Andrada_Lab2Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Culda_Andrada_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Culda_Andrada_Lab2Context' not found.")));
 
