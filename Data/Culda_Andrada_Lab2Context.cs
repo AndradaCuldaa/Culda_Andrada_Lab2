@@ -21,5 +21,8 @@ namespace Culda_Andrada_Lab2.Data
 
         public DbSet<Category> Category { get; set; }
         public DbSet<BookCategory> BookCategory { get; set; }
+        public DbSet<Member> Member { get; set; }
+        public DbSet<Culda_Andrada_Lab2.Models.Borrowing> Borrowing { get; set; } = default!;
     }
 }
+    
